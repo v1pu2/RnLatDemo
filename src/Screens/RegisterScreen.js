@@ -1,3 +1,4 @@
+import auth from '@react-native-firebase/auth';
 import React, {useState, useRef} from 'react';
 import {
   StyleSheet,
@@ -25,8 +26,20 @@ const RegisterScreen = props => {
   const emailRef = useRef();
   const passRef = useRef();
 
-  const validateRegister = () => {
+  const validateRegister = async () => {
     console.log('register click');
+    try {
+      let response = await auth().createUserWithEmailAndPassword(
+        userEmail,
+        userPassword,
+      );
+      if (response) {
+        console.log('?????', response);
+        navigation.navigate('Login');
+      }
+    } catch (e) {
+      console.error('error register', e.message);
+    }
   };
   return (
     <KeyboardAvoidingView style={styles.container}>

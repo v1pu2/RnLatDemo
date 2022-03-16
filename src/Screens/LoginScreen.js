@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Button from '../Component/Button';
 import c_styles from '../Theme/CommonStyles';
+import auth from '@react-native-firebase/auth';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -32,8 +33,20 @@ const LoginScreen = props => {
   //   }
   // };
 
-  const validateLogin = () => {
+  const validateLogin = async () => {
     console.log('login click');
+    try {
+      let response = await auth().signInWithEmailAndPassword(
+        userEmail,
+        userPassword,
+      );
+      console.log('response in signin ', response);
+      if (response) {
+        console.log('Success ✅', 'Authenticated successfully');
+      }
+    } catch (e) {
+      console.error('error in login', e.message);
+    }
   };
 
   return (
