@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "916635606702",
+    "project_id": "rnlatdemo",
+    "storage_bucket": "rnlatdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916635606702:android:859cc195e512838367d73f",
+        "android_client_info": {
+          "package_name": "com.rnlatdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916635606702-0ufkprj4c2aq7s8rf2m141a66iffbmdl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbkgoGJS19dwsGKlRtGFPshGCP6tIDjIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916635606702-0ufkprj4c2aq7s8rf2m141a66iffbmdl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
