@@ -4,7 +4,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import ListScreen from '../Screens/ListScreen';
 
 import Colors from '../Theme/Colors';
-// import {HomeScreen} from '../screens/Home';
+
 
 const Stack = createStackNavigator();
 
