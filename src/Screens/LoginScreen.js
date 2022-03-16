@@ -6,11 +6,12 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Dimensions,
-  Alert,
 } from 'react-native';
 import Button from '../Component/Button';
 import c_styles from '../Theme/CommonStyles';
 import auth from '@react-native-firebase/auth';
+import {logIn} from '../Actions/ActionAuth';
+import {useDispatch} from 'react-redux';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -19,19 +20,7 @@ const LoginScreen = props => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const passRef = useRef();
-
-  // const validateEmail = () => {
-  //   const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  //   if (reg.test(userEmail) !== true) {
-  //     Alert.alert('Email should be valid');
-  //     return false;
-  //   } else if (userEmail.toLowerCase() !== props.user?.email.toLowerCase()) {
-  //     Alert.alert('User is not registered');
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // };
+  const dispatch = useDispatch();
 
   const validateLogin = async () => {
     console.log('login click');
@@ -40,9 +29,8 @@ const LoginScreen = props => {
         userEmail,
         userPassword,
       );
-      console.log('response in signin ', response);
       if (response) {
-        console.log('Success ✅', 'Authenticated successfully');
+        dispatch(logIn());
       }
     } catch (e) {
       console.error('error in login', e.message);
