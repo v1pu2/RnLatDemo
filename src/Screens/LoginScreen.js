@@ -29,7 +29,7 @@ const LoginScreen = props => {
         userEmail,
         userPassword,
       );
-      if (response) {
+      if (response && response.user) {
         dispatch(logIn());
       }
     } catch (e) {
