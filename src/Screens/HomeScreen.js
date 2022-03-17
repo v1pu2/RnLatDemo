@@ -7,12 +7,20 @@ import {
   Dimensions,
   TouchableOpacity,
   Button,
+  Keyboard,
   Platform,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../Theme/Colors';
+import MapView from 'react-native-maps';
+import ButtonC from '../Component/Button';
+import {useDispatch} from 'react-redux';
+import {CREATE_EVENT} from '../Actions/Types';
+import {addEvent} from '../Actions/ActionItem';
+import {NavigationContainer} from '@react-navigation/native';
 
 const HomeScreen = props => {
+  const dispatch = useDispatch();
   const [eventName, setEventName] = useState('');
 
   const [startDate, setStartDate] = useState(new Date());
@@ -22,6 +30,14 @@ const HomeScreen = props => {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [showEnd, setShowEnd] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+  const [address, setAddress] = useState('');
+  const [region, setRegion] = useState({
+    latitude: 51.5079145,
+    longitude: -0.0899163,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01,
+  });
 
   const onChange = (event, selectedValue) => {
     setShow(Platform.OS === 'ios');
@@ -67,6 +83,31 @@ const HomeScreen = props => {
       date.getMonth() + 1
     }/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
   };
+  const clearAllFields = () => {
+    setEventName('');
+    setAddress('');
+    setStartDate(new Date());
+    setStartTime(new Date());
+    setEndDate(new Date());
+    setEndTime(new Date());
+    Keyboard.dismiss();
+  };
+  const createEvent = () => {
+    let start = formatDate(startDate, startTime);
+    let end = formatDate(endDate, endTime);
+    console.log(start, end);
+    const data = {
+      eName: eventName,
+      eAddress: address,
+      sDateTime: start,
+      eDateTime: end,
+    };
+    console.log('request', data);
+    dispatch(addEvent(data));
+    clearAllFields();
+    // setItem('');
+    // Keyboard.dismiss();
+  };
   return (
     <View style={styles.container}>
       <Text style={{color: 'black'}}>Create Event with Video details</Text>
@@ -81,6 +122,20 @@ const HomeScreen = props => {
             placeholder="Add Item *"
             returnKeyType="next"
             onChangeText={item => setEventName(item)}
+            placeholderTextColor="#8b9cb5"
+            underlineColorAndroid="#f000"
+          />
+        </View>
+        <View style={styles.rowView}>
+          <Text style={{color: 'black', justifyContent: 'center'}}>
+            Event Address:
+          </Text>
+          <TextInput
+            style={styles.inputStyle}
+            value={address}
+            placeholder="Add Address with comma seperate *"
+            returnKeyType="next"
+            onChangeText={item => setAddress(item)}
             placeholderTextColor="#8b9cb5"
             underlineColorAndroid="#f000"
           />
@@ -128,6 +183,33 @@ const HomeScreen = props => {
             )}
           </View>
         </View>
+
+        {/* <TouchableOpacity onPress={() => setShowMap(true)}>
+          <Text style={{color: 'black'}}>get map</Text>
+        </TouchableOpacity>
+        {showMap && (
+          <MapView
+            // provider="google"
+            style={{flex: 1}}
+            initialRegion={{
+              latitude: 37.78825,
+              longitude: -122.4324,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            // onRegionChangeComplete={region => setRegion(region)}
+            // showsUserLocation
+          />
+        )}
+        <Text style={styles.text}>Current latitude: {region.latitude}</Text>
+        <Text style={{color: 'black', fontSize: 12}}>
+          Current longitude: {region.longitude}
+        </Text> */}
+        <ButtonC text="Create Event" onPress={() => createEvent()} />
+        <ButtonC
+          text="See all events"
+          onPress={() => props.navigation.navigate('ListScreen')}
+        />
       </View>
     </View>
   );
