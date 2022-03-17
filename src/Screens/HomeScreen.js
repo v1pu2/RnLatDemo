@@ -16,6 +16,7 @@ import MapView from 'react-native-maps';
 import ButtonC from '../Component/Button';
 import {useDispatch} from 'react-redux';
 import {addEvent} from '../Actions/ActionItem';
+import { logOut } from '../Actions/ActionAuth';
 
 const HomeScreen = props => {
   const dispatch = useDispatch();
@@ -198,6 +199,7 @@ const HomeScreen = props => {
           text="See all events"
           onPress={() => props.navigation.navigate('ListScreen')}
         />
+        <ButtonC text="Log out" onPress={() => dispatch(logOut())} />
       </View>
     </View>
   );
