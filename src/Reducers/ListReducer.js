@@ -7,15 +7,13 @@ const initialState = {
 
 let id = 0;
 const listReducer = (state = initialState, action) => {
-  console.log('in reducer', action.payload);
-  console.log('in reducer state', state);
   switch (action.type) {
     case CREATE_EVENT:
       const newitem = {
         id: ++id,
         value: action.payload,
       };
-      console.log('newItem', newitem);
+
       return {
         ...state,
         events: state?.events.concat(newitem),

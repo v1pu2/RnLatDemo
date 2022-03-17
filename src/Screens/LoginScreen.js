@@ -23,7 +23,6 @@ const LoginScreen = props => {
   const dispatch = useDispatch();
 
   const validateLogin = async () => {
-    console.log('login click');
     try {
       let response = await auth().signInWithEmailAndPassword(
         userEmail,

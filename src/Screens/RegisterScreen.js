@@ -27,14 +27,12 @@ const RegisterScreen = props => {
   const passRef = useRef();
 
   const validateRegister = async () => {
-    console.log('register click');
     try {
       let response = await auth().createUserWithEmailAndPassword(
         userEmail,
         userPassword,
       );
       if (response) {
-        console.log('?????', response);
         navigation.navigate('Login');
       }
     } catch (e) {
