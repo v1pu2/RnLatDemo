@@ -8,9 +8,9 @@ import {useSelector} from 'react-redux';
 const Navigator = props => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const checkLogin = useSelector(state => state);
-  // useEffect(() => {
-  //   setIsLoggedIn(checkLogin?.AuthReducer?.isLogin);
-  // }, [checkLogin]);
+  useEffect(() => {
+    setIsLoggedIn(checkLogin?.AuthReducer?.isLogin);
+  }, [checkLogin]);
   return (
     <NavigationContainer>
       {isLoggedIn ? <AppStack /> : <AuthStack />}
