@@ -22,14 +22,14 @@ const ListScreen = props => {
     props.getAllEvent();
   }, []);
   useEffect(() => {
-    console.log('props?.items', props?.items);
+
     setAllEvents(props?.items);
   }, [props?.items]);
   const openMap = location => {
     var locationUrl =
       'http://api.positionstack.com/v1/forward?access_key=81f2cbab5535951fe844607ead12aad2&query=';
     const link = locationUrl + `${location}`;
-    console.log('lino--', link);
+ 
     try {
       axios.get(link).then(res => {
         const latitude = res?.data?.data[0]?.latitude;
@@ -40,7 +40,7 @@ const ListScreen = props => {
           ios: 'maps:' + latitude + ',' + longitude + '?q=' + label,
           android: 'geo:' + latitude + ',' + longitude + '?q=' + label,
         });
-        console.log('url---', url);
+      
         Linking.openURL(url);
       });
     } catch (error) {

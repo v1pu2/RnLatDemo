@@ -15,9 +15,7 @@ import Colors from '../Theme/Colors';
 import MapView from 'react-native-maps';
 import ButtonC from '../Component/Button';
 import {useDispatch} from 'react-redux';
-import {CREATE_EVENT} from '../Actions/Types';
 import {addEvent} from '../Actions/ActionItem';
-import {NavigationContainer} from '@react-navigation/native';
 
 const HomeScreen = props => {
   const dispatch = useDispatch();
@@ -95,27 +93,23 @@ const HomeScreen = props => {
   const createEvent = () => {
     let start = formatDate(startDate, startTime);
     let end = formatDate(endDate, endTime);
-    console.log(start, end);
+
     const data = {
       eName: eventName,
       eAddress: address,
       sDateTime: start,
       eDateTime: end,
     };
-    console.log('request', data);
+
     dispatch(addEvent(data));
     clearAllFields();
-    // setItem('');
-    // Keyboard.dismiss();
   };
   return (
     <View style={styles.container}>
       <Text style={{color: 'black'}}>Create Event with Video details</Text>
       <View style={styles.innerView}>
         <View style={styles.rowView}>
-          <Text style={{color: 'black', justifyContent: 'center'}}>
-            Event Name:
-          </Text>
+          <Text style={styles.txtValue}>Event Name:</Text>
           <TextInput
             style={styles.inputStyle}
             value={eventName}
@@ -127,13 +121,11 @@ const HomeScreen = props => {
           />
         </View>
         <View style={styles.rowView}>
-          <Text style={{color: 'black', justifyContent: 'center'}}>
-            Event Address:
-          </Text>
+          <Text style={styles.txtValue}>Event Address:</Text>
           <TextInput
             style={styles.inputStyle}
             value={address}
-            placeholder="Add Address with comma seperate *"
+            placeholder="Add Address *"
             returnKeyType="next"
             onChangeText={item => setAddress(item)}
             placeholderTextColor="#8b9cb5"
@@ -141,9 +133,7 @@ const HomeScreen = props => {
           />
         </View>
         <View style={styles.rowView}>
-          <Text style={{color: 'black', justifyContent: 'center'}}>
-            Start date and time :
-          </Text>
+          <Text style={styles.txtValue}>Start date and time :</Text>
           <View style={{flex: 1}}>
             <TouchableOpacity onPress={() => showDatePicker('start')}>
               <Text style={{color: 'black'}}>
@@ -163,9 +153,7 @@ const HomeScreen = props => {
         </View>
 
         <View style={styles.rowView}>
-          <Text style={{color: 'black', justifyContent: 'center'}}>
-            End date and time :
-          </Text>
+          <Text style={styles.txtValue}>End date and time :</Text>
           <View style={{flex: 1}}>
             <TouchableOpacity onPress={() => showDatePicker('end')}>
               <Text style={{color: 'black', padding: 10}}>
@@ -223,6 +211,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: Colors.color1,
   },
+  txtValue: {color: 'black', justifyContent: 'center'},
   innerView: {padding: 40, width: Dimensions.get('window').width},
   inputStyle: {
     flex: 1,
