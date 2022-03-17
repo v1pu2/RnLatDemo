@@ -4,7 +4,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import ListScreen from '../Screens/ListScreen';
 
 import Colors from '../Theme/Colors';
-
+import EventDetail from '../Screens/EventDetail';
 
 const Stack = createStackNavigator();
 
@@ -14,11 +14,36 @@ export const AppStack = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: Colors.color2,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerTitleAlign: 'center',
+        }}
       />
       <Stack.Screen
         name="ListScreen"
         component={ListScreen}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: Colors.color2,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name="EventDetail"
+        component={EventDetail}
         options={{
           headerShown: true,
           headerStyle: {

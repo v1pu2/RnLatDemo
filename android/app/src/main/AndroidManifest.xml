@@ -2,6 +2,8 @@
   package="com.rnlatdemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM\_ALERT\_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS\_FINE\_LOCATION" />
 
     <application
       android:name=".MainApplication"
@@ -22,4 +24,9 @@
         </intent-filter>
       </activity>
     </application>
+    <application>   
+      <meta-data  android:name="com.google.android.geo.API_KEY"      
+      android:value="AIzaSyCorinoLccnAn5R-7Kb8U-VRXxKsS2xEAQ"/>
+    </application>
+   
 </manifest>
