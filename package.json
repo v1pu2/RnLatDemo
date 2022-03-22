@@ -7,7 +7,9 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "android-dev": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && sh ./scripts/clear-android-assets.sh &&  cd ./android && ./gradlew assembleDebug",
+    "android-release": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && sh ./scripts/clear-android-assets.sh &&  cd ./android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.16.3",
@@ -21,14 +23,17 @@
     "react": "17.0.2",
     "react-native": "0.67.3",
     "react-native-gesture-handler": "^2.3.2",
+    "react-native-image-picker": "^4.7.3",
     "react-native-maps": "^0.30.1",
     "react-native-reanimated": "^2.4.1",
     "react-native-safe-area-context": "^4.2.1",
     "react-native-screens": "^3.13.1",
+    "react-native-video": "^5.2.0",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

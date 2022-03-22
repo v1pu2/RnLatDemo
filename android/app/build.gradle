@@ -152,6 +152,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('inapp.keystore')
+            storePassword 'android'
+            keyAlias 'RnLatDemo'
+            keyPassword 'android'
+        }
     }
     buildTypes {
         debug {

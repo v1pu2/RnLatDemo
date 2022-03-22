@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Dimensions,
+  Alert,
 } from 'react-native';
 import Button from '../Component/Button';
 import c_styles from '../Theme/CommonStyles';
@@ -25,7 +26,7 @@ const LoginScreen = props => {
   const validateLogin = async () => {
     try {
       let response = await auth().signInWithEmailAndPassword(
-        userEmail,
+        userEmail.toLowerCase(),
         userPassword,
       );
       if (response && response.user) {
@@ -33,6 +34,7 @@ const LoginScreen = props => {
       }
     } catch (e) {
       console.error('error in login', e.message);
+      Alert.alert('There is no user record, please register before login');
     }
   };
 

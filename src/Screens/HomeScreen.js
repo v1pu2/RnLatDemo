@@ -16,7 +16,8 @@ import MapView from 'react-native-maps';
 import ButtonC from '../Component/Button';
 import {useDispatch} from 'react-redux';
 import {addEvent} from '../Actions/ActionItem';
-import { logOut } from '../Actions/ActionAuth';
+import {logOut} from '../Actions/ActionAuth';
+import VideoPicker from '../Component/VideoPicker';
 
 const HomeScreen = props => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const HomeScreen = props => {
   const [showEnd, setShowEnd] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [address, setAddress] = useState('');
+  const [videoPath, setVideoPath] = useState('');
   const [region, setRegion] = useState({
     latitude: 51.5079145,
     longitude: -0.0899163,
@@ -94,14 +96,13 @@ const HomeScreen = props => {
   const createEvent = () => {
     let start = formatDate(startDate, startTime);
     let end = formatDate(endDate, endTime);
-
     const data = {
       eName: eventName,
       eAddress: address,
       sDateTime: start,
       eDateTime: end,
+      videoPath: videoPath,
     };
-
     dispatch(addEvent(data));
     clearAllFields();
   };
@@ -134,13 +135,11 @@ const HomeScreen = props => {
           />
         </View>
         <View style={styles.rowView}>
-          <Text style={styles.txtValue}>Start date and time :</Text>
           <View style={{flex: 1}}>
-            <TouchableOpacity onPress={() => showDatePicker('start')}>
-              <Text style={{color: 'black'}}>
-                {formatDate(startDate, startTime)}
-              </Text>
-            </TouchableOpacity>
+            <Text style={{color: 'black', paddingHorizontal: 10}}>
+              {formatDate(startDate, startTime)}
+            </Text>
+
             {show && (
               <DateTimePicker
                 value={startDate}
@@ -151,16 +150,18 @@ const HomeScreen = props => {
               />
             )}
           </View>
+          <TouchableOpacity
+            onPress={() => showDatePicker('start')}
+            style={styles.button}>
+            <Text style={styles.appButtonText}>Pick Start Date</Text>
+          </TouchableOpacity>
         </View>
-
         <View style={styles.rowView}>
-          <Text style={styles.txtValue}>End date and time :</Text>
           <View style={{flex: 1}}>
-            <TouchableOpacity onPress={() => showDatePicker('end')}>
-              <Text style={{color: 'black', padding: 10}}>
-                {formatDate(endDate, endTime)}
-              </Text>
-            </TouchableOpacity>
+            <Text style={{color: 'black', paddingHorizontal: 10}}>
+              {formatDate(endDate, endTime)}
+            </Text>
+
             {showEnd && (
               <DateTimePicker
                 value={endDate}
@@ -171,8 +172,12 @@ const HomeScreen = props => {
               />
             )}
           </View>
+          <TouchableOpacity
+            onPress={() => showDatePicker('end')}
+            style={styles.button}>
+            <Text style={styles.appButtonText}>Pick End Date</Text>
+          </TouchableOpacity>
         </View>
-
         {/* <TouchableOpacity onPress={() => setShowMap(true)}>
           <Text style={{color: 'black'}}>get map</Text>
         </TouchableOpacity>
@@ -194,6 +199,7 @@ const HomeScreen = props => {
         <Text style={{color: 'black', fontSize: 12}}>
           Current longitude: {region.longitude}
         </Text> */}
+        <VideoPicker setVideoPath={setVideoPath} />
         <ButtonC text="Create Event" onPress={() => createEvent()} />
         <ButtonC
           text="See all events"
@@ -243,5 +249,19 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     padding: 30,
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 5,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: Colors.color2,
+  },
+  appButtonText: {
+    fontSize: 14,
+    color: '#fff',
+    fontWeight: '500',
+    alignSelf: 'center',
   },
 });
